@@ -11,6 +11,7 @@ import {
 
 import styles from './Header.module.scss';
 import FirstStep from '../FirstStep/FirstStep';
+import TwoStep from '../TwoStep';
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +47,7 @@ const Header = () => {
 					<Modal.Header toggle={toggle} />
 					<Modal.Body>
 						{activeIndex === 0 && <FirstStep />}
-						{activeIndex === 1 && <div>2번 문항</div>}
+						{activeIndex === 1 && <TwoStep />}
 						{activeIndex === 2 && <ThirdStep />}
 						{activeIndex === 3 && <FourthStep />}
 					</Modal.Body>
