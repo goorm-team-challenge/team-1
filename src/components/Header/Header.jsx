@@ -17,6 +17,7 @@ const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [activeIndex, setActiveIndex] = useState(0);
 	const toggle = () => {
+		setActiveIndex(0);
 		setIsOpen((prev) => {
 			return !prev;
 		});
