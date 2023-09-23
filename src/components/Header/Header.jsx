@@ -9,6 +9,7 @@ import {
 } from '@goorm-dev/gds-challenge';
 
 import styles from './Header.module.scss';
+import FirstStep from '../FirstStep/FirstStep';
 
 const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +44,7 @@ const Header = () => {
 				<Modal isOpen={isOpen} centered>
 					<Modal.Header toggle={toggle} />
 					<Modal.Body>
-						{activeIndex === 0 && <div>1번 문항</div>}
+						{activeIndex === 0 && <FirstStep />}
 						{activeIndex === 1 && <div>2번 문항</div>}
 						{activeIndex === 2 && <div>3번 문항</div>}
 						{activeIndex === 3 && <div>4번 문항</div>}
