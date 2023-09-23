@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import cn from 'classnames';
-
+import ThirdStep from '../ThirdStep/ThirdStep';
+import FourthStep from '../FourthStep/FourthStep';
 import {
 	Button,
 	Typography,
@@ -46,8 +47,8 @@ const Header = () => {
 					<Modal.Body>
 						{activeIndex === 0 && <FirstStep />}
 						{activeIndex === 1 && <div>2번 문항</div>}
-						{activeIndex === 2 && <div>3번 문항</div>}
-						{activeIndex === 3 && <div>4번 문항</div>}
+						{activeIndex === 2 && <ThirdStep />}
+						{activeIndex === 3 && <FourthStep />}
 					</Modal.Body>
 					<Modal.Footer between>
 						<CarouselIndicators
