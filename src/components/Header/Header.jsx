@@ -13,12 +13,16 @@ import styles from './Header.module.scss';
 import FirstStep from '../FirstStep/FirstStep';
 import TwoStep from '../TwoStep';
 
-const Header = () => {
+const Header = ({ setKey, setUsers }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [activeIndex, setActiveIndex] = useState(0);
 	const toggle = () => {
 		setActiveIndex(0);
 		setIsOpen((prev) => {
+			localStorage.removeItem('first');
+			localStorage.removeItem('second');
+			localStorage.removeItem('third');
+			localStorage.removeItem('fourth');
 			return !prev;
 		});
 	};
@@ -32,6 +36,25 @@ const Header = () => {
 	const handlePrev = () => {
 		setActiveIndex((prev) => {
 			return prev - 1;
+		});
+	};
+
+	const handleSumbit = () => {
+		const first = JSON.parse(localStorage.getItem('first'));
+		// const second = localStorage.getItem('second');
+		// const third = localStorage.getItem('third');
+		// const fourth = localStorage.getItem('fourth');
+
+		const users = localStorage.getItem('users') || [];
+		// const newUser = { first, second, third, fourth };
+		const newUser = { first };
+		users.push(newUser);
+		setUsers((prev) => {
+			prev.push(newUser);
+			return prev;
+		});
+		setKey((prev) => {
+			return prev + 1;
 		});
 	};
 
@@ -66,7 +89,9 @@ const Header = () => {
 							{activeIndex < 3 && (
 								<Button onClick={handleNext}>다음</Button>
 							)}
-							{activeIndex === 3 && <Button>제출하기</Button>}
+							{activeIndex === 3 && (
+								<Button onClick={handleSumbit}>제출하기</Button>
+							)}
 						</div>
 					</Modal.Footer>
 				</Modal>

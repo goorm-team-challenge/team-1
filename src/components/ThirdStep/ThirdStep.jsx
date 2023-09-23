@@ -1,45 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from 'styled-components';
-import { Button, Typography } from '@goorm-dev/gds-challenge';
+import { Button, Typography, Modal, Form } from '@goorm-dev/gds-challenge';
 
 const data = [
-	{ id: 1, content: '1. 우리의 목표는 순위권 안에 들어가기' },
-	{ id: 2, content: '2. 최소한의 구현 기능 구현하기' },
-	{ id: 3, content: '3. 협력을 통한 협업 능력 기르기' },
-	{ id: 4, content: '4. 협력을 통한 협업 능력 기르기' },
+	{ id: 0, content: '1. 우리의 목표는 순위권 안에 들어가기' },
+	{ id: 1, content: '2. 최소한의 구현 기능 구현하기' },
+	{ id: 2, content: '3. 협력을 통한 협업 능력 기르기' },
+	{ id: 3, content: '4. 협력을 통한 협업 능력 기르기' },
 ];
 
 function ThirdStep() {
 	const [isExpect, setIsExpect] = useState(false);
-	const [isThirdId, setThirdId] = useState(-1);
+	const [selected, setSelected] = useState(-1);
 	const handleIsExpect = (id) => {
-		setThirdId(id);
+		setSelected(id);
 	};
+	useEffect(() => {
+		const dataToStore = {
+			selected: selected.toString(),
+		};
+
+		localStorage.setItem('third', JSON.stringify(dataToStore));
+	}, [selected]);
 	return (
-		<div>
-			<ThirdWrapper>
-				<ThirdContainer>
-					<ThirdTitleBox>
-						<ThirdTitle>
-							<Typography weight={700} token="h4" color="#2B2D36">
-								오프라인 팀 챌린지에 <br /> 가장 기대하는 점은
-								무엇인가요?
-							</Typography>
-						</ThirdTitle>
-						<ThirdSubTitle>
-							<Typography
-								weight={400}
-								token="paragraph-sm"
-								color="#858899"
-								block={false}
-							>
-								더 좋은 챌린지가 될 수 있도록 데이터를
-								수집하려고 해요.
-							</Typography>
-						</ThirdSubTitle>
-					</ThirdTitleBox>
-					<ThirdContentBox>
-						{data.map((item) => (
+		<>
+			<Modal.Body>
+				<ThirdTitleBox>
+					<ThirdTitle>
+						<Typography weight={700} token="h4" color="#2B2D36">
+							오프라인 팀 챌린지에 <br /> 가장 기대하는 점은
+							무엇인가요?
+						</Typography>
+					</ThirdTitle>
+					<ThirdSubTitle>
+						<Typography
+							weight={400}
+							token="paragraph-sm"
+							color="#858899"
+							block={false}
+						>
+							더 좋은 챌린지가 될 수 있도록 데이터를 수집하려고
+							해요.
+						</Typography>
+					</ThirdSubTitle>
+				</ThirdTitleBox>
+				<ThirdContentBox>
+					{data.map((item) => (
+						<Form.Group>
 							<Button
 								key={item.id}
 								iconSide="left"
@@ -47,16 +54,16 @@ function ThirdStep() {
 								color="basic"
 								content="start"
 								block
-								active={item.id === isThirdId}
+								active={item.id === selected}
 								onClick={() => handleIsExpect(item.id)}
 							>
 								{item.content}
 							</Button>
-						))}
-					</ThirdContentBox>
-				</ThirdContainer>
-			</ThirdWrapper>
-		</div>
+						</Form.Group>
+					))}
+				</ThirdContentBox>
+			</Modal.Body>
+		</>
 	);
 }
 
@@ -104,7 +111,7 @@ const ThirdSubTitle = styled.div`
 const ThirdContentBox = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 420px;
+
 	height: 208px;
 	gap: 16px;
 `;

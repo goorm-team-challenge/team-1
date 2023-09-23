@@ -7,6 +7,7 @@ import Card from '../Card/Card';
 import styles from './Views.module.scss';
 
 const Views = ({ users }) => {
+	console.log(users);
 	return (
 		<Card>
 			{users.map((user, index) => {
